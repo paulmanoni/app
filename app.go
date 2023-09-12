@@ -32,10 +32,7 @@ func (a app) Run(addr ...string) error {
 func NewDefaultApp() App {
 	engine := gin.New()
 	engine.Use(gin.Recovery())
-	engine.HTMLRender = pongo2gin.New(pongo2gin.RenderOptions{
-		TemplateDir: "templates",
-		TemplateSet: nil,
-	})
+	engine.HTMLRender = pongo2gin.Default()
 	engine.GET("/docs", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "docs.html", pongo2.Context{})
 	})
